@@ -54,9 +54,6 @@ class Hero:
         new_level = self.get_new_level()
         return new_level
 
-    def add_skill(self):
-        pass
-
 
 class MyHero(Hero):
     """Класс-наследник MyHero"""
@@ -75,10 +72,11 @@ class MyHero(Hero):
         """Добавление навыков в зависимости от уровня"""
         while self._level > len(self._my_hero_skills):
             print(f"Выберите навык из: {', '.join(self._skill_list)}")
-            chosen_skill = input("Введите навык: ")
+            chosen_skill = input(">Введите навык: ")
             if chosen_skill in self._skill_list:
                 self._my_hero_skills.append(chosen_skill)
                 self._skill_list.remove(chosen_skill)
+
                 print(f"Навык {chosen_skill} добавлен.")
             else:
                 print("Неверный навык. Попробуйте снова.")
