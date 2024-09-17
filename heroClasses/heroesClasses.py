@@ -46,4 +46,4 @@ class Hero:
 
 
 class MyHero(Hero):
-    pass
+    '''Создан класс MyHero'''
