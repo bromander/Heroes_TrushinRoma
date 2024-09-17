@@ -1,43 +1,56 @@
 class Hero:
-    """Добавлен базовый класс Hero"""
-    __mage_skills = ["огненный шар", "ледяная стрела", "удар молнии"]
-    __warrior_skills = ["удар в прыжке", "вой", "берсерк"]
-    __ranger_skills = ["быстрая стрельба", "двойной выстрел", "скрытность"]
+    """Базовый класс Hero с защищенными полями"""
+    _mage_skills = ["огненный шар", "ледяная стрела", "удар молнии"]
+    _warrior_skills = ["удар в прыжке", "вой", "берсерк"]
+    _ranger_skills = ["быстрая стрельба", "двойной выстрел", "скрытность"]
 
     def __init__(self, name):
-        """Написан конструктор для класса"""
-        self.name = name
-        self.my_hero_skills = []
-        self.level = 0
-        self.exp = 0
+        """Конструктор класса с защищенными полями"""
+        self._name = name
+        self._my_hero_skills = []
+        self._level = 0
+        self._exp = 0
+
+    # Геттеры для всех полей
+    def get_name(self):
+        return self._name
+
+    def get_my_hero_skills(self):
+        return self._my_hero_skills
+
+    def get_level(self):
+        return self._level
+
+    def get_exp(self):
+        return self._exp
 
     def get_skills(self, character_class):
-        """Добавлен геттер для навыков, результат зависит от выбранного класса"""
+        """Геттер для навыков в зависимости от выбранного класса"""
         if character_class == 'воин':
-            return self.__warrior_skills
+            return self._warrior_skills
         elif character_class == 'маг':
-            return self.__mage_skills
+            return self._mage_skills
         elif character_class == 'рейнджер':
-            return self.__ranger_skills
+            return self._ranger_skills
         else:
-            exit("Ошибка перезапустите программу!")
+            exit("Ошибка, перезапустите программу!")
 
     def get_new_level(self):
-        if self.exp >= 1000:
-            self.level = 3
+        if self._exp >= 1000:
+            self._level = 3
             self.add_skill()
-        elif self.exp >= 500:
-            self.level = 2
+        elif self._exp >= 500:
+            self._level = 2
             self.add_skill()
-        elif self.exp >= 200:
-            self.level = 1
+        elif self._exp >= 200:
+            self._level = 1
             self.add_skill()
         else:
-            self.level = 0
-        return f"Герой {self.name}, теперь {self.level} уровня, навыки: {', '.join(self.my_hero_skills)}"
+            self._level = 0
+        return f"Герой {self._name}, теперь {self._level} уровня, навыки: {', '.join(self._my_hero_skills)}"
 
     def add_exp(self, exp):
-        self.exp += exp
+        self._exp += exp
         new_level = self.get_new_level()
         return new_level
 
@@ -46,4 +59,30 @@ class Hero:
 
 
 class MyHero(Hero):
-    '''Создан класс MyHero'''
+    """Класс-наследник MyHero"""
+
+    def __init__(self, name, character_class):
+        """Инициализация с учетом класса персонажа"""
+        super().__init__(name)
+        self._character_class = character_class
+        self._skill_list = self.get_skills(character_class)
+
+    # Геттер для skill_list
+    def get_skill_list(self):
+        return self._skill_list
+
+    def add_skill(self):
+        """Добавление навыков в зависимости от уровня"""
+        while self._level > len(self._my_hero_skills):
+            print(f"Выберите навык из: {', '.join(self._skill_list)}")
+            chosen_skill = input("Введите навык: ")
+            if chosen_skill in self._skill_list:
+                self._my_hero_skills.append(chosen_skill)
+                self._skill_list.remove(chosen_skill)
+                print(f"Навык {chosen_skill} добавлен.")
+            else:
+                print("Неверный навык. Попробуйте снова.")
+
+            # Прерывание цикла, если количество навыков соответствует уровню
+            if len(self._my_hero_skills) == self._level:
+                break
