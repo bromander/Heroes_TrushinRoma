@@ -1,8 +1,12 @@
 from heroClasses.heroesClasses import MyHero
 
-if __name__ == "__main__":
-    # Создаем героя с классом
-    gendalf = MyHero("Гендальф", "маг")
 
-    # Добавляем опыт, чтобы повысить уровень и выбрать навыки
-    print(gendalf.add_exp(600))  # Достаточно опыта для уровня 2
+abobus = MyHero("абобус", "рейнджер")
+print(abobus.add_exp(200))
+print(abobus.add_exp(500))
+print(abobus.add_exp(1000))
+
+bromand = MyHero("броманд", "рейнджер")
+print(bromand.add_exp(200))
+print(bromand.add_exp(500))
+print(bromand.add_exp(1000))

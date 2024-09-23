@@ -47,7 +47,7 @@ class Hero:
             self.add_skill()
         else:
             self._level = 0
-        return f"Герой {self._name}, теперь {self._level} уровня, навыки: {', '.join(self._my_hero_skills)}"
+        return f"\nГерой {self._name}, теперь {self._level} уровня, навыки: {', '.join(self._my_hero_skills)}"
 
     def add_exp(self, exp):
         self._exp += exp
@@ -79,7 +79,7 @@ class MyHero(Hero):
 
                 print(f"Навык {chosen_skill} добавлен.")
             else:
-                print("Неверный навык. Попробуйте снова.")
+                print("Неверный навык, или он уже есть. Попробуйте снова.")
 
             # Прерывание цикла, если количество навыков соответствует уровню
             if len(self._my_hero_skills) == self._level:
